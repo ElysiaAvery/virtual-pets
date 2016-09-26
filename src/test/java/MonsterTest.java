@@ -145,9 +145,57 @@ public class MonsterTest {
   public void Monster_foodLevelCannotIncreaseBeyondMaxValue() {
     Monster testMonster = new Monster("Bubbles", 1);
     for(int i = Monster.MIN_ALL_LEVELS; i <= (Monster.MAX_FOOD_LEVEL); i++) {
-      testMonster.feed();
+      try {
+        testMonster.feed();
+      } catch (UnsupportedOperationException exception){ }
     }
     System.out.println(testMonster.getFoodLevel());
     assertTrue(testMonster.getFoodLevel() <= Monster.MAX_FOOD_LEVEL);
   }
+
+  @Test(expected = UnsupportedOperationException.class)
+   public void feed_throwsExceptionIfFoodLevelIsAtMaxValue(){
+     Monster testMonster = new Monster("Bubbles", 1);
+     for(int i = Monster.MIN_ALL_LEVELS; i <= (Monster.MAX_FOOD_LEVEL); i++){
+       testMonster.feed();
+     }
+   }
+
+   @Test
+   public void monster_playLevelCannotIncreaseBeyondMaxValue() {
+     Monster testMonster = new Monster("Bubbles", 1);
+     for(int i = Monster.MIN_ALL_LEVELS; i <= Monster.MAX_PLAY_LEVEL; i++) {
+       try {
+         testMonster.play();
+       } catch (UnsupportedOperationException exception) { }
+     }
+     assertTrue(testMonster.getPlayLevel() <= Monster.MAX_PLAY_LEVEL);
+   }
+
+   @Test(expected = UnsupportedOperationException.class)
+   public void play_throwsExceptionIfPlayLevelIsAtMaxValue(){
+     Monster testMonster = new Monster("Bubbles", 1);
+     for(int i = Monster.MIN_ALL_LEVELS; i <= Monster.MAX_PLAY_LEVEL; i++) {
+       testMonster.play();
+     }
+   }
+
+   @Test
+   public void Monster_sleepLevelCannotIncreaseBeyondMaxValue() {
+     Monster testMonster = new Monster("Bubbles", 1);
+     for(int i = Monster.MIN_ALL_LEVELS; i <= Monster.MAX_SLEEP_LEVEL; i++) {
+       try {
+         testMonster.play();
+       } catch (UnsupportedOperationException exception) { }
+     }
+     assertTrue(testMonster.getSleepLevel() <= Monster.MAX_SLEEP_LEVEL);
+   }
+
+   @Test(expected = UnsupportedOperationException.class)
+   public void sleep_throwsExceptionIfPlayLevelIsAtMaxValue(){
+     Monster testMonster = new Monster("Bubbles", 1);
+     for(int i = Monster.MIN_ALL_LEVELS; i <= Monster.MAX_SLEEP_LEVEL; i++) {
+       testMonster.sleep();
+     }
+   }
 }
