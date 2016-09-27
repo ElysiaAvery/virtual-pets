@@ -6,7 +6,7 @@ import java.util.TimerTask;
 
 public class FireMonster extends Monster {
   private int fireLevel;
-  public Timestamp lastKindled;
+  public Timestamp lastKindling;
   public static final int MAX_FIRE_LEVEL = 10;
   public static final String DATABASE_TYPE = "fire";
 
@@ -25,8 +25,8 @@ public class FireMonster extends Monster {
     return fireLevel;
   }
 
-  public Timestamp getLastKindled() {
-    return lastKindled;
+  public Timestamp getLastKindling() {
+    return lastKindling;
   }
 
   public void kindling() {
@@ -36,7 +36,7 @@ public class FireMonster extends Monster {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE monsters SET lastkindling = now() WHERE id = :id";
       con.createQuery(sql)
-      .addParameter("id", id)
+      .addParameter("id", this.id)
       .executeUpdate();
     }
     fireLevel++;

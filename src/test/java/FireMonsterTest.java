@@ -153,7 +153,6 @@ public class FireMonsterTest {
         testFireMonster.feed();
       } catch (UnsupportedOperationException exception){ }
     }
-    System.out.println(testFireMonster.getFoodLevel());
     assertTrue(testFireMonster.getFoodLevel() <= FireMonster.MAX_FOOD_LEVEL);
   }
 
@@ -291,9 +290,9 @@ public class FireMonsterTest {
      FireMonster testFireMonster = new FireMonster("Smokey", 1);
      testFireMonster.save();
      testFireMonster.kindling();
-     Timestamp savedFireMonsterLastKindled = FireMonster.find(testFireMonster.getId()).getLastKindled();
+     Timestamp savedFireMonsterLastKindling = FireMonster.find(testFireMonster.getId()).getLastKindling();
+     System.out.println(savedFireMonsterLastKindling);
      Timestamp rightNow = new Timestamp(new Date().getTime());
-     assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(savedFireMonsterLastKindled));
+     assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(savedFireMonsterLastKindling));
    }
-
 }

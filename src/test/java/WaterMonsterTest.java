@@ -152,7 +152,6 @@ public class WaterMonsterTest {
         testWaterMonster.feed();
       } catch (UnsupportedOperationException exception){ }
     }
-    System.out.println(testWaterMonster.getFoodLevel());
     assertTrue(testWaterMonster.getFoodLevel() <= WaterMonster.MAX_FOOD_LEVEL);
   }
 
@@ -283,6 +282,16 @@ public class WaterMonsterTest {
      for(int i = WaterMonster.MIN_ALL_LEVELS; i <= WaterMonster.MAX_WATER_LEVEL; i++) {
        testWaterMonster.water();
      }
+   }
+
+   @Test
+   public void water_recordsTimeLastWaterInDatabase() {
+     WaterMonster testWaterMonster = new WaterMonster("Drippy", 1);
+     testWaterMonster.save();
+     testWaterMonster.water();
+     Timestamp savedWaterMonsterLastWater = WaterMonster.find(testWaterMonster.getId()).getLastWater();
+     Timestamp rightNow = new Timestamp(new Date().getTime());
+     assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(savedWaterMonsterLastWater));
    }
 
 }

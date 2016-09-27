@@ -8,6 +8,7 @@ public class WaterMonster extends Monster {
   private int waterLevel;
   public static final int MAX_WATER_LEVEL = 8;
   public static final String DATABASE_TYPE = "water";
+  public Timestamp lastWater;
 
   public WaterMonster(String name, int personId) {
     this.name = name;
@@ -22,6 +23,10 @@ public class WaterMonster extends Monster {
 
   public int getWaterLevel() {
     return waterLevel;
+  }
+
+  public Timestamp getLastWater() {
+    return lastWater;
   }
 
   public void water() {
