@@ -75,4 +75,28 @@ public class Community {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM communities WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", this.id)
+      .executeUpdate();
+
+      sql = "DELETE FROM persons_communities WHERE community_id = :id";
+      con.createQuery(sql)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
+
+  public void removePerson(Person person) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM persons_communities WHERE person_id = :id AND community_id = :community_id";
+      con.createQuery(sql)
+        .addParameter("id", person.getId())
+        .addParameter("community_id", this.id)
+        .executeUpdate();
+    }
+  }
+
 }
