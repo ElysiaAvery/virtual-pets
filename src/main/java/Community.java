@@ -20,6 +20,10 @@ public class Community {
     return description;
   }
 
+  public int getId() {
+    return id;
+  }
+
   @Override
   public boolean equals(Object otherCommunity) {
     if(!(otherCommunity instanceof Community)) {
@@ -46,6 +50,28 @@ public class Community {
     try(Connection con = DB.sql2o.open()) {
       String allCommunityQuery = "SELECT * FROM communities";
       return con.createQuery(allCommunityQuery).executeAndFetch(Community.class);
+    }
+  }
+
+  public void addPerson(Person person) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO persons_communities (person_id, community_id) VALUES (:person_id, :community_id)";
+      con.createQuery(sql)
+      .addParameter("person_id", person.getId())
+      .addParameter("community_id", this.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Person> getPersons() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT persons.* FROM communities " +
+                   "JOIN persons_communities ON (communities.id = persons_communities.community_id) " +
+                   "JOIN persons ON (persons_communities.person_id = persons.id) " +
+                   "WHERE communities.id = :id";
+      return con.createQuery(sql)
+                .addParameter("id", this.id)
+                .executeAndFetch(Person.class);
     }
   }
 
