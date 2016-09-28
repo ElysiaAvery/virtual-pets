@@ -2,7 +2,7 @@
 
 ### _Epicodus: Java Week 4, Advanced Java Topics: Virtual Pets_
 
-#### By _[**Caleb Stevenson**](https://github.com/CGrahamS) &amp; [**Chance Neff**](https://github.com/crneff84)_
+#### By _[**Caleb Stevenson**](https://github.com/CGrahamS) &amp; **Chance Neff**  [**Elysia Nason**](https://github.com/elysiaavery)_
 
 ## Description
 
@@ -38,6 +38,7 @@ None
 
 Caleb Stevenson: _cgrahamstevenson@gmail.com_
 Chance Neff: _crneff84@gmail.com_
+Elysia Nason: _elysia.avery@gmail.com_
 
 ## Technologies Used
 
@@ -50,4 +51,4 @@ SQL_
 
 This webpage is licensed under the GPL license.
 
-Copyright &copy; 2016 **_Caleb Stevenson &amp; Chance Neff_**
+Copyright &copy; 2016 **_Caleb Stevenson &amp; Chance Neff &amp; Elysia Nason_**
