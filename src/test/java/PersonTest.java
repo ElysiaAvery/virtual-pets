@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.Arrays;
 import org.sql2o.*;
+import java.util.List;
 
 
 public class PersonTest {
@@ -78,6 +79,20 @@ public class PersonTest {
     secondMonster.save();
     Object[] monsters = new Object[] { firstMonster, secondMonster };
     assertTrue(testPerson.getMonsters().containsAll(Arrays.asList(monsters)));
+  }
+
+  @Test
+  public void getCommunities_returnsAllCommunities_true() {
+    Community firstCommunity = new Community("WATER GUIZ", "WATER IS WET.");
+    firstCommunity.save();
+    Community secondCommunity = new Community("FIRE BOIZ", "FIRE IS HOT.");
+    secondCommunity.save();
+    Person firstPerson = new Person("THAT GUY", "th@guy.com");
+    firstPerson.save();
+    firstCommunity.addPerson(firstPerson);
+    secondCommunity.addPerson(firstPerson);
+    List savedCommunities = firstPerson.getCommunities();
+    assertEquals(2, savedCommunities.size());
   }
 
 }

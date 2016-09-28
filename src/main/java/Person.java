@@ -85,4 +85,16 @@ public class Person {
     return allMonsters;
   }
 
+  public List<Community> getCommunities() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT communities.* FROM persons " +
+                   "JOIN persons_communities ON (persons.id = persons_communities.person_id) " +
+                   "JOIN communities ON (persons_communities.community_id = communities.id) " +
+                   "WHERE persons.id = :id";
+      return con.createQuery(sql)
+                .addParameter("id", id)
+                .executeAndFetch(Community.class);
+    }
+  }
+
 }
