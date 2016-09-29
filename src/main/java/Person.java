@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import org.sql2o.*;
 
-public class Person {
+public class Person implements DatabaseManagement {
   private String name;
   private String email;
   private int id;
@@ -35,6 +35,7 @@ public class Person {
     }
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO persons (name, email) VALUES (:name, :email)";
@@ -104,6 +105,20 @@ public class Person {
          .addParameter("community_id", community.getId())
          .addParameter("person_id", this.getId())
          .executeUpdate();
+    }
+  }
+
+  @Override
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM persons WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+      String joinDeleteQuery = "DELETE FROM persons_communities WHERE person_id = :personId";
+      con.createQuery(joinDeleteQuery)
+        .addParameter("personId", this.getId())
+        .executeUpdate();
     }
   }
 

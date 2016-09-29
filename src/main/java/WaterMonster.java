@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WaterMonster extends Monster {
+public class WaterMonster extends Monster implements DatabaseManagement {
   private int waterLevel;
   public static final int MAX_WATER_LEVEL = 8;
   public static final String DATABASE_TYPE = "water";
@@ -82,6 +82,5 @@ public class WaterMonster extends Monster {
     }
     return true;
   }
-
 
 }

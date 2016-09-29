@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.sql2o.*;
 
-public class Community {
+public class Community implements DatabaseManagement {
   private int id;
   private String name;
   private String description;
@@ -35,6 +35,7 @@ public class Community {
     }
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO communities (name, description) VALUES (:name, :description)";
@@ -75,6 +76,7 @@ public class Community {
     }
   }
 
+  @Override
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM communities WHERE id = :id";

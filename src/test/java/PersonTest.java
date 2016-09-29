@@ -107,4 +107,23 @@ public class PersonTest {
     assertEquals(0, savedCommunities.size());
   }
 
+  @Test
+  public void delete_deletesPerson_true() {
+    Person testPerson = new Person("Bobbo Ross", "bob@ross.com");
+    testPerson.save();
+    testPerson.delete();
+    assertEquals(0, Person.all().size());
+  }
+
+  @Test
+  public void delete_deletesAllPersonsAndCommunitiesAssociations() {
+    Community testCommunity = new Community("FIRE GUIZ", "hot");
+    testCommunity.save();
+    Person testPerson = new Person("Bobbo Ross", "bob@ross.com");
+    testPerson.save();
+    testCommunity.addPerson(testPerson);
+    testPerson.delete();
+    assertEquals(0, testCommunity.getPersons().size());
+  }
+
 }
